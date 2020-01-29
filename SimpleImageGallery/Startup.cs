@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SimpleImageGallery.Data;
+using SimpleImageGallery.Services;
 
 namespace SimpleImageGallery
 {
@@ -30,6 +31,7 @@ namespace SimpleImageGallery
 
             ConfigureDatabase(services);
 
+            services.AddScoped<IImage, ImageService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

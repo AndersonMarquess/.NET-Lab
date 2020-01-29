@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SimpleImageGallery.Data;
 using SimpleImageGallery.Data.Models;
 using SimpleImageGallery.Models;
 using System;
@@ -8,11 +9,20 @@ namespace SimpleImageGallery.Controllers
 {
     public class GalleryController : Controller
     {
+        private readonly IImage _imageService;
+
+        public GalleryController(IImage imageService)
+        {
+            this._imageService = imageService;
+        }
+
         public IActionResult Index()
         {
+            var images = _imageService.FindAll();
+
             var model = new GalleryIndexModel()
             {
-                Images = GetMockGalleryImages(),
+                Images = images,
                 SearchQuery = ""
             };
             return View(model);
