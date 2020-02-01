@@ -27,7 +27,7 @@ namespace SimpleImageGallery.Services
 
         public GalleryImage FindById(int id)
         {
-            return _context.GalleryImages.FirstOrDefault(gallery => gallery.Id == id);
+            return FindAll().Where(img => img.Id == id).FirstOrDefault();
         }
     }
 }
