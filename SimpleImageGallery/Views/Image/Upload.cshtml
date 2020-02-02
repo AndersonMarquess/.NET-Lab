@@ -9,8 +9,7 @@
 <div class="container body-content">
     <div class="row upload-container">
         <div class="upload-form drop-shadow">
-            <form id="upload-form" asp-action="UploadNewImage"
-                  method="post" enctype="multipart/form-data">
+            <form id="upload-form" asp-action="UploadNewImage" method="post" enctype="multipart/form-data">
 
                 <div class="form-group">
                     <label asp-for="Title"></label>
@@ -25,7 +24,7 @@
                 <div class="form-group">
                     <label class="btn btn-default btn-file">
                         Browse for image
-                        <input name="file" type="file" style="display: none" />
+                        <input asp-for="ImageUploaded" type="file" accept="image/jpeg, image/png" style="display: none" />
                     </label>
                 </div>
                 <div class="submit">
@@ -37,4 +36,3 @@
         </div>
     </div>
 </div>
-
