@@ -1,0 +1,1 @@
+Repositório genérico, para armazenar testes (Provas de conceito), com .Net Framework e .Net Core.
