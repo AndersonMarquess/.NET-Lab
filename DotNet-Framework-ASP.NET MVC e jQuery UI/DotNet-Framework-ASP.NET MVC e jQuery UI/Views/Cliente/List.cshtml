@@ -1,0 +1,85 @@
+﻿@model IEnumerable<DotNet_Framework_ASP.NET_MVC_e_jQuery_UI.Models.Cliente>
+
+
+<table class="ui-widget ui-state-default ui-corner-all">
+    <thead class="ui-widget-header">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Codigo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telefone)
+            </th>
+            <th>
+                <button class="ui-state-default ui-corner-all btn-create">
+                    Novo <span class="ui-icon ui-icon-plus" />
+                </button>
+            </th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Codigo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telefone)
+            </td>
+            <td>
+                <button class="btn-delete ui-state-default ui-corner-all"
+                        data-codigo="@item.Codigo">
+                    Remover
+                    <span class="ui-icon ui-icon-trash" />
+                </button>
+                <button class="btn-edit ui-state-default ui-corner-all"
+                        data-codigo="@item.Codigo">
+                    Editar
+                    <span class="ui-icon ui-icon-pencil" />
+                </button>
+                <button class="btn-details ui-state-default ui-corner-all"
+                        data-codigo="@item.Codigo">
+                    Detalhes
+                    <span class="ui-icon ui-icon-document" />
+                </button>
+            </td>
+        </tr>
+    }
+</table>
+
+<div id="modal">
+
+</div>
+
+<script>
+    $(function () {
+        $(".btn-create").click(function () {
+            $("#modal").load("/cliente/create").attr("title",
+                "Adicionar cliente").dialog();
+        });
+
+        $(".btn-details").click(function () {
+            var codigo = $(this).attr("data-codigo");
+            console.log(`código recebido ${codigo}`);
+            $("#modal").load("/cliente/details/" + codigo).attr("title", "Dados do cliente").dialog();
+        });
+
+        $(".btn-edit").click(function () {
+            var codigo = $(this).attr("data-codigo");
+            console.log(`código recebido ${codigo}`);
+            $("#modal").load("/cliente/edit/" + codigo).attr("title", "Editar cliente").dialog();
+        });
+
+        $(".btn-delete").click(function () {
+            var codigo = $(this).attr("data-codigo");
+            console.log(`código recebido ${codigo}`);
+            $("#modal").load("/cliente/delete/" + codigo).attr("title", "Excluir cliente").dialog();
+        });
+    });
+</script>
