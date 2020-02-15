@@ -1,0 +1,86 @@
+﻿@page "/todo"
+@using DotNet_Core_Blazor_Basic_Tutorial.Models;
+
+@inject IModalService Modal;
+
+<h3>Todo</h3>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Is Done</th>
+            <th scope="col">Options</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var todo in todos)
+        {
+            <tr>
+                <td scope="row">@todo.Title</td>
+                <td>
+                    <input class="form-control" style="max-width: 38px;" type="checkbox" @bind="todo.IsDone" />
+                </td>
+                <td>
+                    <button class="btn btn-danger" @onclick='() => ShowDeleteModal(todo)'>Delete</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="2">
+                <input type="text" class="form-control" placeholder="Something Todo" @bind="_todoTitle" />
+            </td>
+            <td>
+                <button class="btn btn-success" @onclick="AddTodo">Add todo</button>
+            </td>
+        </tr>
+    </tfoot>
+</table>
+
+
+@code {
+    private string _todoTitle;
+
+    public IList<TodoItem> todos = new List<TodoItem>();
+
+    public void AddTodo()
+    {
+        if (!string.IsNullOrWhiteSpace(_todoTitle))
+        {
+            todos.Add(new TodoItem
+            {
+                Title = _todoTitle,
+                IsDone = false
+            });
+            ClearField();
+        }
+    }
+
+    private void ShowDeleteModal(TodoItem todoItem)
+    {
+        var parameters = new ModalParameters();
+        parameters.Add("TodoTarget", todoItem);
+        parameters.Add("Todos", todos);
+
+        Modal.OnClose += ModalClosed;
+        Modal.Show<DeleteModal>("Delete todo", parameters);
+    }
+
+    private void ModalClosed(ModalResult modalResult)
+    {
+        if (!modalResult.Cancelled)
+        {
+            todos = (IList<TodoItem>)modalResult.Data;
+            StateHasChanged();
+        }
+        Modal.OnClose -= ModalClosed;
+    }
+
+
+    private void ClearField()
+    {
+        _todoTitle = string.Empty;
+    }
+}

@@ -1,0 +1,33 @@
+﻿@using DotNet_Core_Blazor_Basic_Tutorial.Models;
+@inject IModalService ModalService
+
+<hr />
+Confirm delete of the todo "<span>@TodoTarget.Title</span>" ?
+<hr />
+
+<button type="button" class="btn btn-danger" @onclick="DeleteTodo">Delete</button>
+<button class="btn btn-secondary" @onclick="@Cancel">Cancel</button>
+
+@code {
+    [CascadingParameter] ModalParameters Parameters { get; set; }
+
+    public TodoItem TodoTarget { get; set; }
+    public IList<TodoItem> Todos { get; set; }
+
+    protected override void OnInitialized()
+    {
+        TodoTarget = Parameters.Get<TodoItem>("TodoTarget");
+        Todos = Parameters.Get<IList<TodoItem>>("Todos");
+    }
+
+    void Cancel()
+    {
+        ModalService.Cancel();
+    }
+
+    private void DeleteTodo()
+    {
+        Todos.Remove(TodoTarget);
+        ModalService.Close(ModalResult.Ok<IList<TodoItem>>(Todos));
+    }
+}
