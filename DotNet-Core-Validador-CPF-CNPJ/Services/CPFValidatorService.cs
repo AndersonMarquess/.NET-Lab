@@ -1,52 +1,49 @@
-using System;
+using System.Text.RegularExpressions;
 
 namespace DotNet_Core_Validador_CPF_CNPJ.Services
 {
 	public class CPFValidatorService
 	{
-		private static readonly int[] multiplicationFactorCPF1 = { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
-		private static readonly int[] multiplicationFactorCPF2 = { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+		private static readonly int[] multiplicationFactorFirstDigit = { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+		private static readonly int[] multiplicationFactorSecondDigit = { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
 
 		public static bool IsValid(string cpf)
 		{
 			string cpfOnlyNumbers = ExtractNumberFrom(cpf);
-			if (IsAllTheSameNumber(cpfOnlyNumbers))
+			if (HasInvalidFormat(cpfOnlyNumbers))
 			{
 				return false;
 			}
 
+			string firstDigit = CalculateFirstDigit(cpfOnlyNumbers);
+			string secondDigit = CalculateSecondDigitFrom(cpfOnlyNumbers, firstDigit);
+
+			return cpfOnlyNumbers.EndsWith(firstDigit + secondDigit);
+		}
+
+		private static string ExtractNumberFrom(string cpf)
+		{
+			return Regex.Replace(cpf, "[^\\d]", "");
+		}
+
+		private static bool HasInvalidFormat(string cpf)
+		{
+			return cpf.Length > 11 || cpf.Replace(cpf[0].ToString(), "").Length == 0;
+		}
+
+		private static string CalculateFirstDigit(string cpf)
+		{
+			return CalculateDigitFrom(cpf, multiplicationFactorFirstDigit);
+		}
+
+		private static string CalculateDigitFrom(string cpf, int[] multiplicationFactor)
+		{
 			int sigma = 0;
-			for (int i = 0; i < multiplicationFactorCPF1.Length; i++)
+			for (int i = 0; i < multiplicationFactor.Length; i++)
 			{
-				sigma += int.Parse(cpfOnlyNumbers.ToCharArray()[i].ToString()) * multiplicationFactorCPF1[i];
+				sigma += int.Parse(cpf[i].ToString()) * multiplicationFactor[i];
 			}
-
-			string firstDigit = CalculateDigitFrom(sigma).ToString();
-			string secondDigit = CalculateSecondDigitFrom(cpfOnlyNumbers.Substring(0, cpfOnlyNumbers.Length - 2), firstDigit);
-
-			var rightSize = cpfOnlyNumbers.Length == 11;
-			var teste1 = cpfOnlyNumbers[9].ToString();
-			var rightFirstDigit = teste1.Equals(firstDigit);
-			var teste2 = cpfOnlyNumbers[10].ToString();
-			var rightSecondDigit = teste2.Equals(secondDigit);
-			return rightSize && rightFirstDigit && rightSecondDigit;
-		}
-
-		private static bool IsAllTheSameNumber(string cpf)
-		{
-			return cpf.Replace(cpf[0].ToString(), "").Length == 0;
-		}
-
-		private static string CalculateSecondDigitFrom(string cpfWithoutDigit, string firstDigit)
-		{
-			var sigma = 0;
-			var cpfWithFirstDigit = cpfWithoutDigit + firstDigit;
-			for (int i = 0; i < multiplicationFactorCPF2.Length; i++)
-			{
-				sigma += int.Parse(cpfWithFirstDigit[i].ToString()) * multiplicationFactorCPF2[i];
-			}
-			var secondDigit = CalculateDigitFrom(sigma);
-			return secondDigit.ToString();
+			return CalculateDigitFrom(sigma).ToString();
 		}
 
 		private static int CalculateDigitFrom(int sigma)
@@ -55,9 +52,10 @@ namespace DotNet_Core_Validador_CPF_CNPJ.Services
 			return digit == 10 ? 0 : digit;
 		}
 
-		private static string ExtractNumberFrom(string cpf)
+		private static string CalculateSecondDigitFrom(string cpf, string firstDigit)
 		{
-			return cpf.Replace(" ", "").Replace(".", "").Replace("-", "");
+			var cpfWithFirstDigit = cpf + firstDigit;
+			return CalculateDigitFrom(cpfWithFirstDigit, multiplicationFactorSecondDigit);
 		}
 	}
 }
