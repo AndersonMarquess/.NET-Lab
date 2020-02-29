@@ -1,0 +1,42 @@
+﻿@page "/databinding"
+@using Classes.Shared.Models
+
+<h2>Usando Data Binding</h2>
+
+<main>
+    <section>
+
+        <h3>One way</h3>
+        <p>Olá, @Usuario</p>
+
+    </section>
+    <section>
+
+        <h3>Two way</h3>
+        <label for="inp-nome">Nome</label>
+        <input id="inp-nome" type="text" class="form-control" @bind="@Usuario"/>
+        <p>Olá, @Usuario</p>
+
+    </section>
+</main>
+
+
+
+@code {
+
+    public string Usuario { get; set; } = "Anderson";
+}
+
+<style>
+    main {
+        display: flex;
+    }
+
+    main section {
+        flex: 1;
+    }
+
+    input{
+        max-width: 300px;
+    }
+</style>

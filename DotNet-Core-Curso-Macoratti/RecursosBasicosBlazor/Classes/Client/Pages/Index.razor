@@ -1,0 +1,32 @@
+﻿@page "/"
+
+@using Classes.Shared.Models
+
+<h2>Usando Classe</h2>
+
+<h3>Classe local</h3>
+<label class="mb-2">Calculando...</label>
+<p>20 + 1 = @Calculo.Somar(20, 1)</p>
+<p>20 - 1 = @Calculo.Subtrair(20, 1)</p>
+<p>20 * 1 = @Calculo.Multiplicar(20, 1)</p>
+
+<h3>Classe externa</h3>
+<label>Produto</label>
+@*Chamada direta*@
+<p>Nome: @Produto.PegarProdutoMock().Nome</p>
+<p>Data de cadastro: @ProdutoTest.PegarDataDoCadastroFormatada()</p>
+
+@code {
+
+    //Classe externa
+    public Produto ProdutoTest { get { return Produto.PegarProdutoMock(); } }
+
+
+    //Classes Local
+    public class Calculo
+    {
+        public static int Somar(int val1, int val2) => val1 + val2;
+        public static int Subtrair(int val1, int val2) => val1 - val2;
+        public static int Multiplicar(int val1, int val2) => val1 * val2;
+    }
+}
