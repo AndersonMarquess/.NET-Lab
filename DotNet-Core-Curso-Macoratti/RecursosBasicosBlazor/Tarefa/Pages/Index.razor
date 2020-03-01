@@ -1,0 +1,106 @@
+﻿@page "/"
+@inject HttpClient httpClient
+
+<h2 class="mb-5 mt-3">Tarefas</h2>
+
+<main>
+    <section>
+        <h4>Nova tarefa</h4>
+        <input type="text" class="form-control" @bind="@_novaTarefa" spellcheck="true" placeholder="Nome da tarefa" />
+        <br />
+        <button class="btn btn-primary" @onclick="AdicionarTarefa">Adicionar</button>
+    </section>
+
+    <section>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td>Descrição</td>
+                    <td>Data de criação</td>
+                    <td>Concluído</td>
+                    <td>Opções</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var tarefa in Tarefas)
+                {
+                    <tr>
+                        <td>
+                            @tarefa.Descricao
+                        </td>
+                        <td>
+                            <input type="date" value="@tarefa.DataCriacao.ToString("yyyy-MM-dd")" class="form-control" readonly />
+                        </td>
+                        <td>
+                            <input type="checkbox" checked="@tarefa.Concluido" class="form-control float-left w-25" />
+                        </td>
+                        <td>
+                            <button class="btn btn-danger" @onclick="@(() => RemoverTarefa(tarefa))">Remover</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </section>
+</main>
+
+@code {
+
+    //Método que faz parte do ciclo de vida do componente
+    protected override async Task OnInitializedAsync()
+    {
+        var tarefasRecuperadas = await httpClient.GetJsonAsync<List<Tarefa>>("dados/mock_data.json");
+        Tarefas.AddRange(tarefasRecuperadas);
+    }
+
+    public class Tarefa
+    {
+        public Guid ID { get; set; }
+        public string Descricao { get; set; }
+        public bool Concluido { get; set; }
+        public DateTime DataCriacao { get; set; }
+    }
+
+    private string _novaTarefa = "";
+    public List<Tarefa> Tarefas { get; set; } = new List<Tarefa>();
+
+    private void AdicionarTarefa()
+    {
+        if (!string.IsNullOrWhiteSpace(_novaTarefa))
+        {
+            Tarefas.Add(new Tarefa
+            {
+                ID = Guid.NewGuid(),
+                Descricao = _novaTarefa,
+                DataCriacao = DateTime.Now
+            });
+            _novaTarefa = "";
+        }
+    }
+
+    private void RemoverTarefa(Tarefa tarefa)
+    {
+        if (tarefa == null) return;
+        Tarefas.Remove(tarefa);
+    }
+}
+
+<style>
+    main {
+        display: flex;
+    }
+
+        main section:nth-child(1) {
+            flex: 1;
+            margin-right: 30px;
+        }
+
+        main section:nth-child(2) {
+            flex: 2;
+        }
+
+    section input {
+        max-width: 300px;
+    }
+</style>
