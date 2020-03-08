@@ -26,10 +26,8 @@
                 @foreach (var tarefa in Tarefas)
                 {
                     <tr>
-                        <TarefaDetalhe Tarefa="tarefa" />
-                        <td>
-                            <button class="btn btn-danger" @onclick="@(() => RemoverTarefa(tarefa))">Remover</button>
-                        </td>
+                        @* No componente TarefaDetalhe, quando o botão remover for pressionado, ó método RemoverTarefa será invocado. *@
+                        <TarefaDetalhe Tarefa="tarefa" RemoverTarefaCallBack="RemoverTarefa"/>
                     </tr>
                 }
             </tbody>

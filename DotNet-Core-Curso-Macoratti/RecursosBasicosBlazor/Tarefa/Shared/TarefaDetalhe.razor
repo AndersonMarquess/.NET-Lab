@@ -8,7 +8,16 @@
 <td>
     <input type="checkbox" checked="@Tarefa.Concluido" class="form-control float-left w-25" />
 </td>
-   
+@* Callback *@
+<td>
+    <button class="btn btn-danger" @onclick="@(() => RemoverTarefaCallBack.InvokeAsync(Tarefa))">Remover</button>
+</td>
+
+
 @code {
     [Parameter] public TarefaModelo Tarefa { get; set; }
+
+    //Passagem de evento como parâmetro, quando o botão for pressionado, o componente pai irá remover a terafa
+    // RemoverTarefaCallBack irá atuar como delegate.
+    [Parameter] public EventCallback<TarefaModelo> RemoverTarefaCallBack { get; set; }
 }
