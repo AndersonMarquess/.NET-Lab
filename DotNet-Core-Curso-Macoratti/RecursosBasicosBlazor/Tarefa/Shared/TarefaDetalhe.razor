@@ -1,0 +1,14 @@
+﻿
+<td>
+    @Tarefa.Descricao
+</td>
+<td>
+    <input type="date" value="@Tarefa.DataCriacao.ToString("yyyy-MM-dd")" class="form-control" readonly />
+</td>
+<td>
+    <input type="checkbox" checked="@Tarefa.Concluido" class="form-control float-left w-25" />
+</td>
+   
+@code {
+    [Parameter] public TarefaModelo Tarefa { get; set; }
+}

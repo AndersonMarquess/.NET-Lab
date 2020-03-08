@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Classes.Client", "Classes\C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Classes.Shared", "Classes\Shared\Classes.Shared.csproj", "{463DC629-66CE-41D5-AB20-C51A0ACC586B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tarefa", "Tarefa\Tarefa.csproj", "{7C6F4EEF-0B83-4FCC-BD58-90CA7AA2FC89}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tarefa", "Tarefa\Tarefa.csproj", "{7C6F4EEF-0B83-4FCC-BD58-90CA7AA2FC89}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
