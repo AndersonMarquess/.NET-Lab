@@ -1,0 +1,22 @@
+﻿@page "/databinding"
+<h3>Data Binding</h3>
+
+<h2>@_nome</h2>
+
+<hr />
+<label>OnChange</label>
+<br />
+
+@* Por padrão usa o evento OnChange *@
+<input @bind="_nome"/>
+
+<hr/>
+<label>OnInput</label>
+<br />
+
+@* Binding usando o evento OnInput *@
+<input @bind-value="_nome" @bind-value:event="oninput"/>
+
+@code {
+    private string _nome { get; set; } = "Nome padrão";
+}
