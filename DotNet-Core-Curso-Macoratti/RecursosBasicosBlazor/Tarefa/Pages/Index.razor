@@ -1,5 +1,6 @@
 ﻿@page "/"
 @inject HttpClient httpClient
+@inject ITarefaRepositorio  tarefaRepositorio
 
 <TarefaGeral Titulo="Tarefas" Tarefas="@PegarTarefas()"></TarefaGeral>
 
@@ -12,6 +13,11 @@
     {
         var tarefasRecuperadas = await httpClient.GetJsonAsync<List<TarefaModelo>>("dados/mock_data.json");
         Tarefas.AddRange(tarefasRecuperadas);
+    }
+
+    protected override void OnInitialized()
+    {
+        Tarefas.AddRange(tarefaRepositorio.ObterTodas());
     }
 
     private List<TarefaModelo> PegarTarefas()

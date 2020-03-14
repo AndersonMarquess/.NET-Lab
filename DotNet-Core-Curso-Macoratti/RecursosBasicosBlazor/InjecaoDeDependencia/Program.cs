@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Blazor.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using Tarefa.Repositorios;
+using InjecaoDeDependencia.Servicos;
 
-namespace Tarefa
+namespace InjecaoDeDependencia
 {
     public class Program
     {
@@ -12,9 +12,16 @@ namespace Tarefa
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("app");
 
-            builder.Services.AddScoped<ITarefaRepositorio, TarefaRepositorio>();
+            ConfigurarServicos(builder);
 
             await builder.Build().RunAsync();
+        }
+
+        private static void ConfigurarServicos(WebAssemblyHostBuilder builder)
+        {
+            builder.Services.AddSingleton<ServicoSingleton>();
+            builder.Services.AddScoped<ServicoScoped>();
+            builder.Services.AddTransient<ServicoTransient>();
         }
     }
 }
