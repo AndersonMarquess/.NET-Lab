@@ -21,7 +21,11 @@
             <tbody>
                 @if (Tarefas == null || Tarefas.Count == 0)
                 {
-                    <Alerta Mensagem="Nenhuma tarefa cadastrada"></Alerta>
+                    <Alerta Mensagem="Nenhuma tarefa cadastrada">
+                        @*<p>Cadastre novas tarefas, para exibi-las aqui.</p>*@
+                        <PrimeiroFragmento>Cadastre novas tarefas, </PrimeiroFragmento>
+                        <SegundoFragmento>para exibi-las aqui.</SegundoFragmento>
+                    </Alerta>
                 }
                 @foreach (var tarefa in Tarefas)
                 {

@@ -2,7 +2,27 @@
     <strong>@Mensagem</strong>
 </div>
 
+<div>
+    @*@if (ChildContent != null)
+    {
+        @ChildContent
+    }*@
+
+    @if(PrimeiroFragmento != null && SegundoFragmento != null)
+    {
+        @PrimeiroFragmento
+        @SegundoFragmento
+    }
+</div>
+
 @code {
     //Parâmetro que será informado ao utilizar o componente
     [Parameter] public string Mensagem { get; set; }
+
+    //Todo HTML externo que será injetado na página, sem precisar especificar a tag
+    //[Parameter] public RenderFragment ChildContent { get; set; }
+
+    // Html externo específico que será injetado
+    [Parameter] public RenderFragment PrimeiroFragmento { get; set; }
+    [Parameter] public RenderFragment SegundoFragmento { get; set; }
 }
