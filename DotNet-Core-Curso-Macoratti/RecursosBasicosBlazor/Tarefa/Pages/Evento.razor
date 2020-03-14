@@ -1,20 +1,9 @@
 ﻿@page "/evento"
+@*Necessário para migar o código de dentro da diretiva @code para uma classe externa*@
+@inherits EventoBase
 
 <h3>Evento</h3>
 
 <div style="background-color: @_cor; padding: 50px;"></div>
 
 <input type="text" @onkeypress="@(e => TeclaPressionada(e))" />
-
-@code {
-    private string _cor { get; set; } = "lightgreen";
-
-    private void TeclaPressionada(KeyboardEventArgs args)
-    {
-        Console.WriteLine($"Tecla pressionada: {args.Key}");
-        if (args.Key == "A" || args.Key == "a")
-        {
-            _cor = "blue";
-        }
-    }
-}
