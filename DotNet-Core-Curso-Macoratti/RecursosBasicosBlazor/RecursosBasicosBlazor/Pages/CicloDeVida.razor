@@ -1,0 +1,42 @@
+﻿@page "/ciclodevida"
+@*Necessário implementar, para chamar o método Dispose*@
+@implements IDisposable
+
+<h2>@Titulo</h2>
+<p>Renderizado as @HoraRenderizacao</p>
+
+@code {
+    public string Titulo { get; set; }
+    public string HoraRenderizacao { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Titulo = "On Initialized";
+        RegistrarHoraDeRenderizacao(Titulo);
+    }
+
+    private void RegistrarHoraDeRenderizacao(string nomeDoCiclo)
+    {
+        HoraRenderizacao = DateTime.Now.ToLongTimeString();
+        Console.WriteLine($"{nomeDoCiclo}: {HoraRenderizacao}");
+    }
+
+    protected override void OnParametersSet()
+    {
+        Titulo = "On parameters set, recebido parâmetros do componente pai";
+        RegistrarHoraDeRenderizacao(Titulo);
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        Titulo = "On after render";
+        Console.WriteLine($"Primeira execução do {Titulo}: {firstRender}");
+        RegistrarHoraDeRenderizacao(Titulo);
+    }
+
+    public void Dispose()
+    {
+        Titulo = "Dispose";
+        RegistrarHoraDeRenderizacao(Titulo);
+    }
+}

@@ -3,9 +3,9 @@
 
 <h2 class="mb-3 mt-3">Olá, @nome</h2>
 
-<button class="btn btn-primary" @onclick="@(() => Console.WriteLine("Impresso com onclick"))">Imprimir no console</button>
-<button class="btn btn-success" @onclick="@(() => Console.WriteLine(PergarDataHoraFormatada()))">Imprimir data e hora formatado</button>
-<button class="btn btn-dark" @onclick="@(() => ImprimirMeuNome(nome))">Chama método passando argumento</button>
+<button class="btn btn-primary btn-metodo" @onclick="@(() => Console.WriteLine("Impresso com onclick"))">Imprimir no console</button>
+<button class="btn btn-success btn-metodo" @onclick="@(() => Console.WriteLine(PergarDataHoraFormatada()))">Imprimir data e hora formatado</button>
+<button class="btn btn-dark btn-metodo" @onclick="@(() => ImprimirMeuNome(nome))">Chama método passando argumento</button>
 
 @* Instruções em C# *@
 @code {
@@ -23,7 +23,7 @@
 }
 
 <style>
-    button {
+    button.btn-metodo {
         display: block !important;
         margin-bottom: 10px;
     }
