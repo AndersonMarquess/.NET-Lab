@@ -19,24 +19,14 @@
                 </tr>
             </thead>
             <tbody>
-                @if (Tarefas == null || Tarefas.Count == 0)
-                {
-                    <Alerta Mensagem="Nenhuma tarefa cadastrada">
-                        @*<p>Cadastre novas tarefas, para exibi-las aqui.</p>*@
-                        <PrimeiroFragmento>Cadastre novas tarefas, </PrimeiroFragmento>
-                        <SegundoFragmento>para exibi-las aqui.</SegundoFragmento>
-                    </Alerta>
-                }
-                @foreach (var tarefa in Tarefas)
-                {
-                    <tr>
-                        @* No componente TarefaDetalhe, quando o botão remover for pressionado, ó método RemoverTarefa será invocado. *@
-                        <TarefaDetalhe Tarefa="tarefa" RemoverTarefaCallBack="RemoverTarefa"/>
-                    </tr>
-                }
+                @*Usa o componente ListaGenerica para iterar sobre a lista informada*@
+                <ListaGenerica ListaItem="Tarefas">
+                    <Lista Context="tarefa">
+                        <TarefaDetalhe Tarefa="tarefa" RemoverTarefaCallBack="RemoverTarefa" />
+                    </Lista>
+                </ListaGenerica>
             </tbody>
         </table>
-
     </section>
 </main>
 

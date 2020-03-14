@@ -1,0 +1,44 @@
+﻿@* Tipa o item como genérico *@
+@typeparam Titem
+
+@if (ListaItem == null)
+{
+    @if (Carregando != null)
+    {
+        @Carregando
+    }
+    else
+    {
+        <p>Carregando</p>
+    }
+}
+else if (ListaItem.Count == 0)
+{
+    @if (SemRegistro != null)
+    {
+        @SemRegistro
+    }
+    else
+    {
+        <p>Sem registros, adicione uma item para exibi-lo.</p>
+    }
+} else
+{
+    foreach (var item in ListaItem)
+    {
+        //Lista é um RenderFragment que será substituido ao usar o componente de ListaGenerica
+        @Lista(item)
+    }
+}
+
+
+
+
+@code {
+    [Parameter] public RenderFragment Carregando { get; set; }
+    [Parameter] public RenderFragment SemRegistro { get; set; }
+    
+    //Usa um tipo genérico para receber qualquer enumeração que possa ser listada
+    [Parameter] public List<Titem> ListaItem { get; set; }
+    [Parameter] public RenderFragment<Titem> Lista { get; set; }
+}
