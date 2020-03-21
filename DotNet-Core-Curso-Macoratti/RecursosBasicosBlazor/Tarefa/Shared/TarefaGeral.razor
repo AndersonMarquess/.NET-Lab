@@ -1,4 +1,7 @@
-﻿<h2 class="mb-5 mt-3">@Titulo</h2>
+﻿@*Necessário para trabalhar com javascript*@
+@inject IJSRuntime jsRuntime;
+
+<h2 class="mb-5 mt-3">@Titulo</h2>
 
 <main>
     <section>
@@ -49,10 +52,20 @@
         }
     }
 
-    private void RemoverTarefa(TarefaModelo tarefa)
+    private async Task RemoverTarefa(TarefaModelo tarefa)
     {
-        if (tarefa == null) return;
-        Tarefas.Remove(tarefa);
+        //Invocação do método confirm do javascript
+        var result = await jsRuntime.InvokeAsync<bool>("confirm", $"Deseja remover a tarefa \"{tarefa?.Descricao}\" ?");
+
+        if (result)
+        {
+            if (tarefa == null) return;
+            Tarefas.Remove(tarefa);
+            //Usando método padrão
+            //await jsRuntime.InvokeVoidAsync("alert", "Tarefa excluida com sucesso");
+            // Usando método personalizado
+            await jsRuntime.InvokeVoidAsync("MostrarAlerta", "Tarefa excluida com sucesso. [Método personalizado]");
+        }
     }
 }
 
