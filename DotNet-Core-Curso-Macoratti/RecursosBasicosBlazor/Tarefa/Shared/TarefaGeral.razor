@@ -52,6 +52,8 @@
             _totalDeTarefas = Tarefas.Count();
 
             await jsRuntime.InvokeVoidAsync("RecuperarTotalDeTarefas");
+            //Nome do método e argumentos
+            await jsRuntime.InvokeVoidAsync("RecuperarTotalConcluido", DotNetObjectReference.Create(this));
         }
     }
 
@@ -62,6 +64,13 @@
     public static Task<int> ObterTotalDeTarefas()
     {
         return Task.FromResult(_totalDeTarefas);
+    }
+
+    // Método de instância, invocado com javascript
+    [JSInvokable]
+    public Task<int> ObterTotalDeTarefasConcluidas()
+    {
+        return Task.FromResult(Tarefas.Count(t => t.Concluido));
     }
 
     private async Task RemoverTarefa(TarefaModelo tarefa)

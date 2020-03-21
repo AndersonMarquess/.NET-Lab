@@ -8,3 +8,9 @@ async function RecuperarTotalDeTarefas() {
     const resultado = await DotNet.invokeMethodAsync("Tarefa", "ObterTotalDeTarefas");
     window.MostrarAlerta(resultado);
 }
+
+async function RecuperarTotalConcluido(dotnet) {
+    //Como o "contexto" será passado por argumento, apenas o nome do método é necessário
+    const resultado = await dotnet.invokeMethodAsync("ObterTotalDeTarefasConcluidas");
+    window.MostrarAlerta(resultado);
+}
