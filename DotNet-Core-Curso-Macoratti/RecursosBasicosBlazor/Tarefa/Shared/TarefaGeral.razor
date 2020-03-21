@@ -38,7 +38,7 @@
     [Parameter] public List<TarefaModelo> Tarefas { get; set; }
     private string _novaTarefa = "";
 
-    private void AdicionarTarefa()
+    private async Task AdicionarTarefa()
     {
         if (!string.IsNullOrWhiteSpace(_novaTarefa))
         {
@@ -49,7 +49,19 @@
                 DataCriacao = DateTime.Now
             });
             _novaTarefa = "";
+            _totalDeTarefas = Tarefas.Count();
+
+            await jsRuntime.InvokeVoidAsync("RecuperarTotalDeTarefas");
         }
+    }
+
+    private static int _totalDeTarefas;
+
+    //Anotação para habilitar invocação com JavaScript
+    [JSInvokable]
+    public static Task<int> ObterTotalDeTarefas()
+    {
+        return Task.FromResult(_totalDeTarefas);
     }
 
     private async Task RemoverTarefa(TarefaModelo tarefa)
