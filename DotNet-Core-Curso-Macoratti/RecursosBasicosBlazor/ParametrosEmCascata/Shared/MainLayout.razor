@@ -1,0 +1,38 @@
+﻿@inherits LayoutComponentBase
+
+<div class="sidebar">
+    <NavMenu />
+</div>
+
+<div class="main">
+    <div class="top-row px-4">
+        <a href="http://blazor.net" target="_blank" class="ml-md-auto">About</a>
+    </div>
+
+    <div class="content px-4">
+        @* Passando mais de um parâmetro para o componente, em cascata, é preciso especificar um nome para cada valor*@
+        @*<CascadingValue Value="@Cor" Name="CorCascateada">
+            <CascadingValue Value="@Tamanho" Name="TamanhoDaFonteCascateado">
+                @Body
+            </CascadingValue>
+        </CascadingValue>*@
+
+        @* Quando muitos parâmetros forem necessários, é interessante passar estes valores em uma classe  *@
+        <CascadingValue Value="@Configuracoes" Name="Configuracoes">
+            @Body
+        </CascadingValue>
+    </div>
+</div>
+
+@code{
+
+    private string Cor = "yellowgreen";
+    private string Tamanho = "2em";
+
+    private Configuracao Configuracoes = new Configuracao
+    {
+        Cor = "yellowgreen",
+        Tamanho = "2em",
+        Peso = "bold"
+    };
+}

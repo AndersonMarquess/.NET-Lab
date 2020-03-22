@@ -1,0 +1,14 @@
+﻿@page "/"
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+@* Value, recebe o valor da resposta que será cascateado *@
+<CascadingValue Value="@Resposta">
+    <Pergunta></Pergunta>
+</CascadingValue>
+
+@code {
+    private string Resposta = "42";
+}

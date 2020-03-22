@@ -1,0 +1,25 @@
+﻿@page "/counter"
+
+<section>
+    <main style="background-color:@CorCascateada; font-size:@TamanhoDaFonteCascateado">
+        <h1>Counter</h1>
+
+        <p>Current count: @currentCount</p>
+
+        <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+    </main>
+</section>
+
+
+@code {
+    private int currentCount = 0;
+
+    private void IncrementCount()
+    {
+        currentCount++;
+    }
+
+    //Use o Name para especificar o valor que será acessado
+    [CascadingParameter(Name = "CorCascateada")] private string CorCascateada { get; set; }
+    [CascadingParameter(Name = "TamanhoDaFonteCascateado")] private string TamanhoDaFonteCascateado { get; set; }
+}
