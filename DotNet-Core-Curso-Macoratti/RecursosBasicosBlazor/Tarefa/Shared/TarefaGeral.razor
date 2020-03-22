@@ -25,13 +25,20 @@
                 @*Usa o componente ListaGenerica para iterar sobre a lista informada*@
                 <ListaGenerica ListaItem="Tarefas">
                     <Lista Context="tarefa">
-                        <TarefaDetalhe Tarefa="tarefa" RemoverTarefaCallBack="RemoverTarefa" />
+                        @*<TarefaDetalhe Tarefa="tarefa" RemoverTarefaCallBack="RemoverTarefa" />*@
+                        <TarefaDetalhe Tarefa="tarefa" RemoverTarefaCallBack="RemoverTarefaComModal" />
                     </Lista>
                 </ListaGenerica>
             </tbody>
         </table>
+
     </section>
 </main>
+
+<Modal @ref="ConfirmacaoModal" OnConfirmar="ConfirmarRemocaoComModal">
+    <div>Deseja excluir esta tarefa "@tarefaComModal.Descricao"?</div>
+</Modal>
+
 
 @code {
     [Parameter] public string Titulo { get; set; }
@@ -87,6 +94,21 @@
             // Usando método personalizado
             await jsRuntime.InvokeVoidAsync("MostrarAlerta", "Tarefa excluida com sucesso. [Método personalizado]");
         }
+    }
+
+    //Referência ao componente modal que foi declarado no HTML
+    private Modal ConfirmacaoModal;
+    private TarefaModelo tarefaComModal;
+    private void RemoverTarefaComModal(TarefaModelo tarefa)
+    {
+        ConfirmacaoModal.AlterarVisibilidadeModal();
+        tarefaComModal = tarefa;
+    }
+
+    private void ConfirmarRemocaoComModal()
+    {
+        Tarefas.Remove(tarefaComModal);
+        ConfirmacaoModal.AlterarVisibilidadeModal();
     }
 }
 
