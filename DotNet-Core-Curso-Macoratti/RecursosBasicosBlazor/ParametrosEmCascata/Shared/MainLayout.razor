@@ -19,6 +19,7 @@
 
         @* Quando muitos parâmetros forem necessários, é interessante passar estes valores em uma classe  *@
         <CascadingValue Value="@Configuracoes" Name="Configuracoes">
+            <input type="text" @bind="Configuracoes.Cor"/>
             @Body
         </CascadingValue>
     </div>
