@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tarefa", "Tarefa\Tarefa.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InjecaoDeDependencia", "InjecaoDeDependencia\InjecaoDeDependencia.csproj", "{362B7C4F-4B63-4FFD-A847-711D571AFD2C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParametrosEmCascata", "ParametrosEmCascata\ParametrosEmCascata.csproj", "{E5CBDF96-E9F7-49B5-82EA-D3A7C800EB54}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParametrosEmCascata", "ParametrosEmCascata\ParametrosEmCascata.csproj", "{E5CBDF96-E9F7-49B5-82EA-D3A7C800EB54}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocalStorage", "LocalStorage\LocalStorage.csproj", "{4D4CC13F-B0C4-47E5-BB53-69339D9B4862}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{E5CBDF96-E9F7-49B5-82EA-D3A7C800EB54}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5CBDF96-E9F7-49B5-82EA-D3A7C800EB54}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E5CBDF96-E9F7-49B5-82EA-D3A7C800EB54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D4CC13F-B0C4-47E5-BB53-69339D9B4862}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D4CC13F-B0C4-47E5-BB53-69339D9B4862}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D4CC13F-B0C4-47E5-BB53-69339D9B4862}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D4CC13F-B0C4-47E5-BB53-69339D9B4862}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

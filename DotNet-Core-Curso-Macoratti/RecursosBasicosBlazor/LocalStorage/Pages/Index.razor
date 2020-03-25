@@ -1,0 +1,38 @@
+﻿@page "/"
+
+@* Para injetar o serviço, é preciso instala-lo com nuget e registra-lo no program.cs *@
+@inject Blazored.LocalStorage.ILocalStorageService blazoredLocalStorage
+
+<h2>Minhas anotações</h2>
+
+<textarea @bind="_minhasAnotacoesPessoais" />
+<br />
+<button class="btn btn-success" @onclick="SalvarNoLocalStorage">Salvar</button>
+<button class="btn btn-dark" @onclick="LimparLocalStorage">Limpar</button>
+
+@code {
+
+    private readonly string _keyAnotacao = "AnotacaoCursoBlazor";
+    private string _minhasAnotacoesPessoais { get; set; }
+
+
+    public async void SalvarNoLocalStorage()
+    {
+        if (string.IsNullOrEmpty(_minhasAnotacoesPessoais))
+        {
+            return;
+        }
+
+        await blazoredLocalStorage.SetItemAsync(_keyAnotacao, _minhasAnotacoesPessoais);
+    }
+
+    public async void LimparLocalStorage()
+    {
+        await blazoredLocalStorage.ClearAsync();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        _minhasAnotacoesPessoais = await blazoredLocalStorage.GetItemAsync<string>(_keyAnotacao);
+    }
+}
