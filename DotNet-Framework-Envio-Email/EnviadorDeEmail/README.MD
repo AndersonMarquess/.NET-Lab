@@ -1,0 +1,1 @@
+﻿Fonte:https://codigosimples.net/2014/02/11/como-enviar-e-mails-utilizando-c-de-forma-simples/
