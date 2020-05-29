@@ -94,7 +94,13 @@ namespace DotNet_Framework_ASP.NET_MVC_e_jQuery_UI.Controllers
 
         public ActionResult List()
         {
-            return PartialView(Context.RecuperarClientesMock());
+            var clientes = Context.RecuperarClientesMock();
+            int[] ids = new int[] { 11, 22, 33, 44, 55 };
+            if (clientes.Count() % 2 == 1)
+            {
+                ViewBag.Ids = string.Join(",", ids);
+            }
+            return PartialView(clientes);
         }
     }
 }

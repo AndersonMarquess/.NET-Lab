@@ -58,6 +58,14 @@
 </div>
 
 <script>
+
+    window.ids = new Array();
+    $(document).ready(() => {
+        const ids = "@ViewBag.Ids".split(",");
+        window.ids = ids;
+        console.log('ids recebido no ready', ids);
+    });
+
     $(function () {
         $(".btn-create").click(function () {
             $("#modal").load("/cliente/create").attr("title",
@@ -66,8 +74,11 @@
 
         $(".btn-details").click(function () {
             var codigo = $(this).attr("data-codigo");
-            console.log(`código recebido ${codigo}`);
+            console.log('before log');
+            console.log(`código recebido ${codigo}, é especial? => ${window.ids.some(id => id == codigo)}`);
+            console.log('after log');
             $("#modal").load("/cliente/details/" + codigo).attr("title", "Dados do cliente").dialog();
+            console.log('after dialog º(^.^)º');
         });
 
         $(".btn-edit").click(function () {
