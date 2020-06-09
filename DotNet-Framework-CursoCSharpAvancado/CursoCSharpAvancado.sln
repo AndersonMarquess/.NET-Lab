@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CursoCSharpAvancado", "Curs
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serializador", "Serializador\Serializador.csproj", "{571279F9-85AB-4A40-90C4-E65193A20492}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Generics", "Generics\Generics.csproj", "{12DD7FF9-9A28-4219-AA38-586DE47C8AD0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{571279F9-85AB-4A40-90C4-E65193A20492}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{571279F9-85AB-4A40-90C4-E65193A20492}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{571279F9-85AB-4A40-90C4-E65193A20492}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12DD7FF9-9A28-4219-AA38-586DE47C8AD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12DD7FF9-9A28-4219-AA38-586DE47C8AD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12DD7FF9-9A28-4219-AA38-586DE47C8AD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12DD7FF9-9A28-4219-AA38-586DE47C8AD0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
