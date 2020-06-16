@@ -1,0 +1,59 @@
+﻿@page "/registraUsuario";
+
+<h3>RegistraUsuario</h3>
+
+<EditForm Model="@usuarioExercicio" OnValidSubmit="@AoSubmitValido">
+
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <ValidationSummary></ValidationSummary>
+
+    <br />
+    <label>Nome</label>
+    <InputText @bind-Value="usuarioExercicio.Nome"></InputText>
+
+    <br />
+    <label>Sobrenome</label>
+    <InputText @bind-Value="usuarioExercicio.Sobrenome"></InputText>
+
+    <br />
+    <label>Idade</label>
+    <InputNumber @bind-Value="usuarioExercicio.Idade"></InputNumber>
+
+    <br />
+    <label>Login</label>
+    <InputText @bind-Value="usuarioExercicio.Login"></InputText>
+
+    <br />
+    <label>Email</label>
+    <InputText type="email" @bind-Value="usuarioExercicio.Email"></InputText>
+
+    <br />
+    <label>Perfil</label>
+    <InputSelect @bind-Value="usuarioExercicio.Perfil">
+        <option value="">Escolha um perfil</option>
+        <option value="Admin">Admin</option>
+        <option value="User">User</option>
+    </InputSelect>
+
+    <br />
+    <label>Password</label>
+    <InputText type="password" @bind-Value="@usuarioExercicio.Password"></InputText>
+
+    <br />
+    <label>ConfirmaPassword</label>
+    <InputText type="password" @bind-Value="@usuarioExercicio.ConfirmaPassword"></InputText>
+
+    <button type="submit" class="btn btn-primary">Enviar</button>
+
+</EditForm>
+
+
+
+@code {
+    UsuarioExercicio usuarioExercicio = new UsuarioExercicio();
+
+    public void AoSubmitValido()
+    {
+        Console.WriteLine($"Submeteu dados válidos {usuarioExercicio}");
+    }
+}

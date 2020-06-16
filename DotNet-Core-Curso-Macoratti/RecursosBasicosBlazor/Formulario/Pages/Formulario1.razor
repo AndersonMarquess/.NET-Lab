@@ -1,0 +1,61 @@
+﻿@page "/formulario1"
+
+<h3>Formulario 1</h3>
+
+@* O atributo OnSubmit vai enviar seja o formulário válido ou não. *@
+
+<EditForm Model="@usuario" OnValidSubmit="@AoSubmeterValido" OnInvalidSubmit="@AoSubmeterInvalido">
+
+    @* Habilita as validações dentro do formulário *@
+    <DataAnnotationsValidator />
+    @* Lista todas as mensagens da validação *@
+    <ValidationSummary />
+
+    <label form="nome">Nome</label>
+    <InputText id="nome" @bind-Value="usuario.Nome" class="form-control"></InputText>
+
+    <br />
+    <label form="email">E-mail</label>
+    <InputText id="email" @bind-Value="usuario.Email" class="form-control"></InputText>
+    @* Exibe a mensagem de validação, específica para o campo e-mail *@
+    <ValidationMessage For="() => usuario.Email"></ValidationMessage>
+
+    <br />
+    <label form="idade">Idade</label>
+    <InputNumber id="idade" @bind-Value="usuario.Idade" class="form-control"></InputNumber>
+
+    <br />
+    <label form="status">Status</label>
+    <InputSelect id="status" @bind-Value="usuario.Status" class="form-control">
+        <option value="">Escolha um status</option>
+        <option value="Pendente">Pendente</option>
+        <option value="Ativo">Ativo</option>
+        <option value="Suspenso">Suspenso</option>
+    </InputSelect>
+
+    <br />
+    <input type="submit" value="Enviar" class="btn btn-primary" />
+
+</EditForm>
+
+@code {
+    Usuario usuario = new Usuario();
+
+    private void AoSubmeterValido()
+    {
+        Console.WriteLine($"Valid Submit: {usuario}");
+    }
+
+    //private void AoSubmeterInvalido()
+    //{
+    //    Console.WriteLine($"Invalid Submit: {usuario}");
+    //}
+
+    // Outra forma, usando o edit context
+    private void AoSubmeterInvalido(EditContext editContext)
+    {
+        Console.WriteLine($"O formulário é inválido = {!editContext.Validate()}");
+    }
+
+
+}
