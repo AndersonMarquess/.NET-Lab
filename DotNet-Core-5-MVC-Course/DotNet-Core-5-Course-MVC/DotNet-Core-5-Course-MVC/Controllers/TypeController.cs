@@ -1,24 +1,25 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using DotNet_Core_5_Course_MVC.Database;
-using DotNet_Core_5_Course_MVC.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DotNet_Core_5_Course_MVC.Controllers
 {
-    public class CategoryController : Controller
+    public class TypeController : Controller
     {
         private readonly ApplicationDbContext _database;
 
-        public CategoryController(ApplicationDbContext database)
+        public TypeController(ApplicationDbContext database)
         {
             _database = database;
         }
 
         public IActionResult Index()
         {
-            var categories = _database.Category.ToList();
-            return View(categories);
+            var types = _database.Type.ToList();
+            return View(types);
         }
 
         [HttpGet]
@@ -29,44 +30,43 @@ namespace DotNet_Core_5_Course_MVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Category category)
+        public IActionResult Create(Models.Type type)
         {
             if (ModelState.IsValid)
             {
-                _database.Add(category);
+                _database.Type.Add(type);
                 _database.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(category);
+            return View(type);
         }
 
         [HttpGet]
         public IActionResult Edit(int Id)
         {
-            var category = _database.Category.FirstOrDefault(c => c.Id == Id);
-            return View(category);
+            var type = _database.Type.Find(Id);
+            return View(type);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Category category)
+        public IActionResult Edit(Models.Type type)
         {
             if (ModelState.IsValid)
             {
-                _database.Category.Update(category);
+                _database.Type.Update(type);
                 _database.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(category);
+            return View(type);
         }
-
-        [HttpGet]
-        public IActionResult Delete(int Id, string Teste)
+        
+        public IActionResult Delete(int Id)
         {
-            Category category = _database.Category.FirstOrDefault(c => c.Id == Id);
-            _database.Category.Remove(category);
+            var type = _database.Type.Find(Id);
+            _database.Type.Remove(type);
             _database.SaveChanges();
             return RedirectToAction("Index");
         }

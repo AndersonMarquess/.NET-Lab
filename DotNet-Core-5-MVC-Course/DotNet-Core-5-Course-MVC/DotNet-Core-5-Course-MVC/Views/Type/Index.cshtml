@@ -1,0 +1,47 @@
+﻿@model List<DotNet_Core_5_Course_MVC.Models.Type>
+
+@{
+	ViewData["Title"] = "Type";
+}
+
+<main class="container">
+	<div class="row pt-4">
+		<div class="col-6">
+			<h2 class="text-primary">Type List</h2>
+		</div>
+		<div class="col-6 text-right">
+			<a asp-controller="Type" asp-action="Create" class="btn btn-primary"> Create New Type </a>
+		</div>
+	</div>
+
+	<br />
+	<br />
+
+	@if (Model.Any())
+	{
+		<table class="table table-bordered table-striped" style="width: 100%">
+			<thead>
+				<tr>
+					<th>Type Name</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var item in Model)
+				{
+					<tr>
+						<td width="50%">@item.Name</td>
+						<td>
+							<a asp-controller="Type" asp-action="Edit" asp-route-Id="@item.Id" class="btn btn-dark">Edit</a>
+							<a asp-controller="Type" asp-action="Delete" asp-route-Id="@item.Id" class="btn btn-danger">Delete</a>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	}
+	else
+	{
+		<p>No type Exists</p>
+	}
+</main>

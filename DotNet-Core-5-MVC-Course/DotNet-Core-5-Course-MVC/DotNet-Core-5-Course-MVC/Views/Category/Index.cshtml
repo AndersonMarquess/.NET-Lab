@@ -33,7 +33,10 @@
 					<tr>
 						<td width="50%">@item.Name</td>
 						<td width="30%">@item.DisplayOrder</td>
-						<td></td>
+						<td>
+							<a asp-controller="Category" asp-route-Id="@item.Id" asp-action="Edit" class="btn btn-dark">Edit</a>
+							<a asp-controller="Category" asp-route-Id="@item.Id" asp-route-Teste="hello world" asp-action="Delete" class="btn btn-danger">Delete</a>
+						</td>
 					</tr>
 				}
 			</tbody>

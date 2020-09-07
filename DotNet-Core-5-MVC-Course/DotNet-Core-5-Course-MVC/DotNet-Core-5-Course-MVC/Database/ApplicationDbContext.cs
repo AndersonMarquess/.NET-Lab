@@ -14,5 +14,6 @@ namespace DotNet_Core_5_Course_MVC.Database
         }
 
         public DbSet<Category> Category { get; set; }
+        public DbSet<DotNet_Core_5_Course_MVC.Models.Type> Type { get; set; }
     }
 }
